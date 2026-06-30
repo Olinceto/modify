@@ -1,0 +1,25 @@
+{% extends "moodapp/base.html" %}
+
+{% block body_class %}mood-{{ mood }}{% endblock %}
+
+{% block content %}
+    <h1 class="result-title">Твоето настроение е {{ mood|upper }}!</h1>
+    <p class="subtitle">🎧 Песните са от Spotify</p>
+
+    <ul class="track-list">
+        {% for track in playlist %}
+            <li {% if track.mood != mood %}class="surprise"{% endif %}>
+                <strong>{{ track.title }}</strong> — {{ track.artist }}
+                {% if track.mood != mood %} 🌟{% endif %}
+                <div class="track-genre">{{ track.genre }}</div>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="tip-box">💡 {{ tip }}</div>
+
+    <div class="actions">
+        <a class="download" href="{% url 'download' %}?mood={{ mood }}&surprise={% if has_surprise %}1{% else %}0{% endif %}">📥 Свали плейлиста</a>
+        <a class="back" href="{% url 'quiz' %}">← Назад</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "moodapp/base.html" %}
+
+{% block content %}
+    <p class="subtitle">Отговори на въпросите, за да разберем какъв е твоят "муд" днес!</p>
+
+    <form method="post" action="{% url 'result' %}">
+        {% csrf_token %}
+
+        {% for question in questions %}
+            <div class="card">
+                <h3>{{ forloop.counter }}. {{ question.text }}</h3>
+                {% for key, option in question.options.items %}
+                    <label class="option">
+                        <input type="radio" name="question_{{ forloop.parentloop.counter }}" value="{{ key }}" required>
+                        {{ option.text }}
+                    </label>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <label class="toggle-row">
+            <input type="checkbox" name="include_surprise">
+            ✨ Искам да добавя песен-изненада в плейлиста!
+        </label>
+
+        <button type="submit" class="primary">🚀 Генерирай моя плейлист</button>
+    </form>
+{% endblock %}

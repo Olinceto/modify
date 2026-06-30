@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <title>Moodify</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'moodapp/css/style.css' %}">
+</head>
+<body class="{% block body_class %}{% endblock %}">
+    <div class="page">
+        <header class="site-header">
+            <div class="eq"><span></span><span></span><span></span><span></span></div>
+            <h1 class="logo">Mood<span class="accent">ify</span></h1>
+        </header>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
